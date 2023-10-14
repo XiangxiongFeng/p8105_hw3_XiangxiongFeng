@@ -1,0 +1,14 @@
+---
+title: "Untitled"
+author: "Xiangxiong Feng"
+date: "2023-10-14"
+output: html_document
+---
+
+# Problem 1
+
+```{r}
+library(p8105.datasets)
+data("instacart")
+```
+
