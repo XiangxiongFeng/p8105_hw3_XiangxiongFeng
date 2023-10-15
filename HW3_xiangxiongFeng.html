@@ -518,12 +518,16 @@ instacart =
 </div>
 <div id="problem-2" class="section level1">
 <h1>Problem 2</h1>
-<pre class="r"><code>data(&quot;brfss_smart2010&quot;)
-
-brfss_smart2010_df =
+<pre class="r"><code>data(&quot;brfss_smart2010&quot;)</code></pre>
+<pre class="r"><code>brfss_smart2010 =
   brfss_smart2010 |&gt;
   janitor::clean_names() |&gt;
-  filter(topic == &#39;Overall Health&#39; )</code></pre>
+  filter(topic == &#39;Overall Health&#39;,
+         response %in% c(&#39;Excellent&#39;, &quot;Very good&quot;, &quot;Good&quot;, &quot;Fair&quot;, &quot;Poor&quot;)) |&gt;
+  mutate(response = factor(response, 
+                           levels = c(&quot;Poor&quot;, &quot;Fair&quot;, &quot;Good&quot;,
+                                                &quot;Very good&quot;,&quot;Excellent&quot;), 
+                           ordered = TRUE))</code></pre>
 </div>
 
 
