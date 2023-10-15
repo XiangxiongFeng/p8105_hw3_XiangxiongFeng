@@ -96,6 +96,7 @@ data("brfss_smart2010")
 
 ```
 
+# data cleaning 
 ```{r}
 
 brfss_smart2010 =
@@ -107,12 +108,33 @@ brfss_smart2010 =
                            levels = c("Poor", "Fair", "Good",
                                                 "Very good","Excellent"), 
                            ordered = TRUE))
-  
-  
- 
 ```
 
+# Question 1 
+```{r}
+#count which states were observed at 7 or more locations in 2002
+brfss_smart2010_2002 = 
+  brfss_smart2010 |>
+  filter(year==2002)|>
+  group_by(locationabbr, locationdesc)|>
+  summarize(n_obs = n())|>
+  count(locationabbr)|>
+  filter(n>=7) 
+Morethanseven_2002 = as.list(brfss_smart2010_2002$locationabbr)
 
+#count which states were observed at 7 or more locations in 2002
+brfss_smart2010_2010 = 
+  brfss_smart2010 |>
+  filter(year==2010)|>
+  group_by(locationabbr, locationdesc)|>
+  summarize(n_obs = n())|>
+  count(locationabbr)|>
+  filter(n>=7) 
+Morethanseven_2010 = as.list(brfss_smart2010_2010$locationabbr)
+
+```
+
+In 2002, `r Morethanseven_2002` were observed at 7 or more locations. In 2010, `r Morethanseven_2010`were observed at 7 or more locations.
 
 
 

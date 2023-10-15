@@ -519,6 +519,9 @@ instacart =
 <div id="problem-2" class="section level1">
 <h1>Problem 2</h1>
 <pre class="r"><code>data(&quot;brfss_smart2010&quot;)</code></pre>
+</div>
+<div id="data-cleaning" class="section level1">
+<h1>data cleaning</h1>
 <pre class="r"><code>brfss_smart2010 =
   brfss_smart2010 |&gt;
   janitor::clean_names() |&gt;
@@ -528,6 +531,35 @@ instacart =
                            levels = c(&quot;Poor&quot;, &quot;Fair&quot;, &quot;Good&quot;,
                                                 &quot;Very good&quot;,&quot;Excellent&quot;), 
                            ordered = TRUE))</code></pre>
+</div>
+<div id="question-1" class="section level1">
+<h1>Question 1</h1>
+<pre class="r"><code>#count which states were observed at 7 or more locations in 2002
+brfss_smart2010_2002 = 
+  brfss_smart2010 |&gt;
+  filter(year==2002)|&gt;
+  group_by(locationabbr, locationdesc)|&gt;
+  summarize(n_obs = n())|&gt;
+  count(locationabbr)|&gt;
+  filter(n&gt;=7) </code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;locationabbr&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>Morethanseven_2002 = as.list(brfss_smart2010_2002$locationabbr)
+
+#count which states were observed at 7 or more locations in 2002
+brfss_smart2010_2010 = 
+  brfss_smart2010 |&gt;
+  filter(year==2010)|&gt;
+  group_by(locationabbr, locationdesc)|&gt;
+  summarize(n_obs = n())|&gt;
+  count(locationabbr)|&gt;
+  filter(n&gt;=7) </code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;locationabbr&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>Morethanseven_2010 = as.list(brfss_smart2010_2010$locationabbr)</code></pre>
+<p>In 2002, CT, FL, MA, NC, NJ, PA were observed at 7 or more locations.
+In 2010, CA, CO, FL, MA, MD, NC, NE, NJ, NY, OH, PA, SC, TX, WAwere
+observed at 7 or more locations.</p>
 </div>
 
 
