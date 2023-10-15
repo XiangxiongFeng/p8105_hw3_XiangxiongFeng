@@ -4,12 +4,7 @@ author: "Xiangxiong Feng"
 date: "2023-10-14"
 output: html_document
 ---
-```{r}
-library(tidyverse)
-library(ggridges)
-library(patchwork)
 
-```
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -42,7 +37,7 @@ scale_fill_discrete = scale_fill_viridis_d
 # Problem 1
 
 ```{r}
-library(p8105.datasets)
+
 data("instacart")
 instacart = 
   instacart |> 
@@ -88,7 +83,37 @@ instacart |>
     values_from = mean_hour) |>
   knitr::kable(digits = 2)
 ```
+
+
+
+
+
+# Problem 2
+
+```{r}
+data("brfss_smart2010")
+
+brfss_smart2010_df =
+  brfss_smart2010 |>
+  janitor::clean_names() |>
+  filter(topic == 'Overall Health' )
+  
+ 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
