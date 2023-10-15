@@ -4,6 +4,12 @@ author: "Xiangxiong Feng"
 date: "2023-10-14"
 output: html_document
 ---
+```{r}
+library(tidyverse)
+library(ggridges)
+library(patchwork)
+
+```
 
 # Problem 1
 
