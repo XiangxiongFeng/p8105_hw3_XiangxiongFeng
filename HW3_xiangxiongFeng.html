@@ -641,6 +641,9 @@ plot_2006+plot_2010</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>results_data = 
+  full_join(demog_df, tidy_accel_df, by=&#39;seqn&#39;)|&gt;
+  drop_na()</code></pre>
 </div>
 </div>
 

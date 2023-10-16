@@ -222,6 +222,11 @@ demog_df =
 
 ```
 
+```{r}
+results_data = 
+  full_join(demog_df, tidy_accel_df, by='seqn')|>
+  drop_na()
+```
 
 
 
