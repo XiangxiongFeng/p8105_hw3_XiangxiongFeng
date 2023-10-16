@@ -160,8 +160,34 @@ Excellent_brfss |>
 
 
 
+# Quesiton 3
+
+```{r}
+plot_data_2006 = 
+  brfss_smart2010 |>
+  filter(year == 2006, state == 'NY') 
+  
+plot_2006 = 
+  plot_data_2006|>
+  ggplot(aes(x=response, y = data_value)) +
+  ggtitle('distribution of data_value in 2006')+
+  geom_violin(aes(fill = response))+
+  theme(legend.position = 'none')
+  
+
+plot_data_2010 = 
+  brfss_smart2010 |>
+  filter(year == 2010, state == 'NY') 
+  
+plot_2010 = 
+  plot_data_2010|>
+  ggplot(aes(x=response, y = data_value)) +
+  ggtitle('distribution of data_value in 2006')+
+  geom_violin(aes(fill = response))
 
 
+plot_2006+plot_2010
+```
 
 
 
