@@ -610,7 +610,8 @@ plot_2006+plot_2010</code></pre>
 <h2>Problem 3</h2>
 <pre class="r"><code>accel_df =
   read_csv(&#39;data/nhanes_accel.csv&#39;)|&gt;
-  janitor::clean_names()</code></pre>
+  janitor::clean_names()|&gt;
+  drop_na()</code></pre>
 <pre><code>## Rows: 250 Columns: 1441
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;

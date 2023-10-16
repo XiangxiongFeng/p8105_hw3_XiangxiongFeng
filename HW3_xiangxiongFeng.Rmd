@@ -196,7 +196,8 @@ plot_2006+plot_2010
 ```{r}
 accel_df =
   read_csv('data/nhanes_accel.csv')|>
-  janitor::clean_names()
+  janitor::clean_names()|>
+  drop_na()
 
 tidy_accel_df = 
   pivot_longer(
