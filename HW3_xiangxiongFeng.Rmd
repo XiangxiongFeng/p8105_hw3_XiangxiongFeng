@@ -263,11 +263,14 @@ The table is showing the number of men and women in each education category. We 
 
 # visualization of the age distributions for men and women in each education category. Comment on these items 
 
-```{r}
 
+```{r}
+results_data_untidy |>
+  ggplot(aes(x=education, y = age)) +
+  geom_boxplot(aes(color = sex))
 ```
 
-
+This is a boxplot showing the age distributions for men and women in each education category. From the plot, we can see that the biggest difference occurs in education level 2. 
 
 
 
