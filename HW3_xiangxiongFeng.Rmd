@@ -223,10 +223,53 @@ demog_df =
 ```
 
 ```{r}
-results_data = 
+results_data_tidy = 
   full_join(demog_df, tidy_accel_df, by='seqn')|>
-  drop_na()
+  drop_na()|>
+   mutate(
+     sex = 
+      case_match(
+        sex, 
+        1 ~ "male", 
+        2 ~ "female"))
+
+results_data_untidy = 
+  full_join(demog_df, accel_df, by='seqn')|>
+  drop_na()|>
+   mutate(
+     sex = 
+      case_match(
+        sex, 
+        1 ~ "male", 
+        2 ~ "female"))
+  
 ```
+
+
+
+# Table fir number of men and women in each education category
+```{r}
+results_data_untidy |>
+  select(sex, education)|>
+  group_by(education)|>
+  count(education, sex)|>
+  knitr::kable()
+ 
+
+```
+
+The table is showing the number of men and women in each education category. We can see that numbers of men and women are  close in 1 and 3 education level but a relatively large diffierence in education 2 level.
+
+
+# visualization of the age distributions for men and women in each education category. Comment on these items 
+
+```{r}
+
+```
+
+
+
+
 
 
 

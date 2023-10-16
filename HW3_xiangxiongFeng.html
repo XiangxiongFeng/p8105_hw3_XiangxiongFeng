@@ -641,10 +641,83 @@ plot_2006+plot_2010</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>results_data = 
+<pre class="r"><code>results_data_tidy = 
   full_join(demog_df, tidy_accel_df, by=&#39;seqn&#39;)|&gt;
-  drop_na()</code></pre>
+  drop_na()|&gt;
+   mutate(
+     sex = 
+      case_match(
+        sex, 
+        1 ~ &quot;male&quot;, 
+        2 ~ &quot;female&quot;))
+
+results_data_untidy = 
+  full_join(demog_df, accel_df, by=&#39;seqn&#39;)|&gt;
+  drop_na()|&gt;
+   mutate(
+     sex = 
+      case_match(
+        sex, 
+        1 ~ &quot;male&quot;, 
+        2 ~ &quot;female&quot;))</code></pre>
 </div>
+</div>
+<div id="table-fir-number-of-men-and-women-in-each-education-category" class="section level1">
+<h1>Table fir number of men and women in each education category</h1>
+<pre class="r"><code>results_data_untidy |&gt;
+  select(sex, education)|&gt;
+  group_by(education)|&gt;
+  count(education, sex)|&gt;
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">education</th>
+<th align="left">sex</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">female</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">male</td>
+<td align="right">27</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">female</td>
+<td align="right">23</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">male</td>
+<td align="right">35</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">female</td>
+<td align="right">59</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">male</td>
+<td align="right">56</td>
+</tr>
+</tbody>
+</table>
+<p>The table is showing the number of men and women in each education
+category. We can see that numbers of men and women are close in 1 and 3
+education level but a relatively large diffierence in education 2
+level.</p>
+</div>
+<div id="visualization-of-the-age-distributions-for-men-and-women-in-each-education-category.-comment-on-these-items" class="section level1">
+<h1>visualization of the age distributions for men and women in each
+education category. Comment on these items</h1>
 </div>
 
 
