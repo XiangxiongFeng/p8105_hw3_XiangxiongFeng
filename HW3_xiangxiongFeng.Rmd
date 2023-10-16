@@ -107,35 +107,53 @@ brfss_smart2010 =
   mutate(response = factor(response, 
                            levels = c("Poor", "Fair", "Good",
                                                 "Very good","Excellent"), 
-                           ordered = TRUE))
+                           ordered = TRUE))|>
+  rename(state = locationabbr, location = locationdesc)
+
 ```
 
-# Question 1 
+# Question 1
 ```{r}
 #count which states were observed at 7 or more locations in 2002
 brfss_smart2010_2002 = 
   brfss_smart2010 |>
   filter(year==2002)|>
-  group_by(locationabbr, locationdesc)|>
+  group_by(state, location)|>
   summarize(n_obs = n())|>
-  count(locationabbr)|>
+  count(state)|>
   filter(n>=7) 
-Morethanseven_2002 = as.list(brfss_smart2010_2002$locationabbr)
+Morethanseven_2002 = as.list(brfss_smart2010_2002$state)
 
 #count which states were observed at 7 or more locations in 2002
 brfss_smart2010_2010 = 
   brfss_smart2010 |>
   filter(year==2010)|>
-  group_by(locationabbr, locationdesc)|>
+  group_by(state, location)|>
   summarize(n_obs = n())|>
-  count(locationabbr)|>
+  count(state)|>
   filter(n>=7) 
-Morethanseven_2010 = as.list(brfss_smart2010_2010$locationabbr)
+Morethanseven_2010 = as.list(brfss_smart2010_2010$state)
 
 ```
 
-In 2002, `r Morethanseven_2002` were observed at 7 or more locations. In 2010, `r Morethanseven_2010`were observed at 7 or more locations.
+In 2002, `r Morethanseven_2002` were observed at 7 or more locations. In 2010, `r Morethanseven_2010` were observed at 7 or more locations.
 
+
+# Question 2
+
+```{r}
+Excellent_brfss = 
+  brfss_smart2010|>
+  filter(response == 'Excellent')|>
+  select(year, state, data_value)|>
+  group_by(year, state) |>
+  summarize(
+    mean_data_value = mean(data_value)
+  )
+
+  
+  
+```
 
 
 

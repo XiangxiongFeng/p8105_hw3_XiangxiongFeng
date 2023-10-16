@@ -530,7 +530,8 @@ instacart =
   mutate(response = factor(response, 
                            levels = c(&quot;Poor&quot;, &quot;Fair&quot;, &quot;Good&quot;,
                                                 &quot;Very good&quot;,&quot;Excellent&quot;), 
-                           ordered = TRUE))</code></pre>
+                           ordered = TRUE))|&gt;
+  rename(state = locationabbr, location = locationdesc)</code></pre>
 </div>
 <div id="question-1" class="section level1">
 <h1>Question 1</h1>
@@ -538,28 +539,41 @@ instacart =
 brfss_smart2010_2002 = 
   brfss_smart2010 |&gt;
   filter(year==2002)|&gt;
-  group_by(locationabbr, locationdesc)|&gt;
+  group_by(state, location)|&gt;
   summarize(n_obs = n())|&gt;
-  count(locationabbr)|&gt;
+  count(state)|&gt;
   filter(n&gt;=7) </code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;locationabbr&#39;. You can override using the
+<pre><code>## `summarise()` has grouped output by &#39;state&#39;. You can override using the
 ## `.groups` argument.</code></pre>
-<pre class="r"><code>Morethanseven_2002 = as.list(brfss_smart2010_2002$locationabbr)
+<pre class="r"><code>Morethanseven_2002 = as.list(brfss_smart2010_2002$state)
 
 #count which states were observed at 7 or more locations in 2002
 brfss_smart2010_2010 = 
   brfss_smart2010 |&gt;
   filter(year==2010)|&gt;
-  group_by(locationabbr, locationdesc)|&gt;
+  group_by(state, location)|&gt;
   summarize(n_obs = n())|&gt;
-  count(locationabbr)|&gt;
+  count(state)|&gt;
   filter(n&gt;=7) </code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;locationabbr&#39;. You can override using the
+<pre><code>## `summarise()` has grouped output by &#39;state&#39;. You can override using the
 ## `.groups` argument.</code></pre>
-<pre class="r"><code>Morethanseven_2010 = as.list(brfss_smart2010_2010$locationabbr)</code></pre>
+<pre class="r"><code>Morethanseven_2010 = as.list(brfss_smart2010_2010$state)</code></pre>
 <p>In 2002, CT, FL, MA, NC, NJ, PA were observed at 7 or more locations.
-In 2010, CA, CO, FL, MA, MD, NC, NE, NJ, NY, OH, PA, SC, TX, WAwere
+In 2010, CA, CO, FL, MA, MD, NC, NE, NJ, NY, OH, PA, SC, TX, WA were
 observed at 7 or more locations.</p>
+</div>
+<div id="question-2" class="section level1">
+<h1>Question 2</h1>
+<pre class="r"><code>Excellent_brfss = 
+  brfss_smart2010|&gt;
+  filter(response == &#39;Excellent&#39;)|&gt;
+  select(year, state, data_value)|&gt;
+  group_by(year, state) |&gt;
+  summarize(
+    mean_data_value = mean(data_value)
+  )</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can override using the
+## `.groups` argument.</code></pre>
 </div>
 
 
