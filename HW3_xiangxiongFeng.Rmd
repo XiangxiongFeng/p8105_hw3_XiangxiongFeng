@@ -206,11 +206,21 @@ tidy_accel_df =
     names_to = 'MIN',
     values_to = 'MIMS'
   )
+```
+
+```{r}
+demog_df =
+  read_csv('data/nhanes_covar.csv')|>
+  janitor::clean_names()|>
+  drop_na()|>
+  filter(age>= 21)|>
+  mutate(education = factor(education, 
+                           levels = c("1", "2", "3"), 
+                           ordered = TRUE))
 
 
 
 ```
-
 
 
 

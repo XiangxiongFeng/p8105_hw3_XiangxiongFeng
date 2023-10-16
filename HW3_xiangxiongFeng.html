@@ -626,6 +626,21 @@ plot_2006+plot_2010</code></pre>
     names_to = &#39;MIN&#39;,
     values_to = &#39;MIMS&#39;
   )</code></pre>
+<pre class="r"><code>demog_df =
+  read_csv(&#39;data/nhanes_covar.csv&#39;)|&gt;
+  janitor::clean_names()|&gt;
+  drop_na()|&gt;
+  filter(age&gt;= 21)|&gt;
+  mutate(education = factor(education, 
+                           levels = c(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;), 
+                           ordered = TRUE))</code></pre>
+<pre><code>## Rows: 250 Columns: 5
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (5): SEQN, sex, age, BMI, education
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
 
