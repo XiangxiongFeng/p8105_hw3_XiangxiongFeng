@@ -273,6 +273,18 @@ results_data_untidy |>
 This is a boxplot showing the age distributions for men and women in each education category. From the plot, we can see that the biggest difference occurs in education level 2. 
 
 
+# Plot  total activities (y-axis) against age (x-axis)
+```{r}
+total_act_df =
+  results_data_untidy
+
+
+
+
+  
+  
+  
+```
 
 
 
