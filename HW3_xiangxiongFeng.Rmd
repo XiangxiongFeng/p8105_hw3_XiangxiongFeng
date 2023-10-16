@@ -10,6 +10,7 @@ output: html_document
 library(tidyverse)
 library(ggridges)
 library(patchwork)
+library(dplyr)
 
 library(p8105.datasets)
 
@@ -88,7 +89,7 @@ instacart |>
 
 
 
-# Problem 2
+## Problem 2
 
 ```{r}
 data("brfss_smart2010")
@@ -190,8 +191,24 @@ plot_2006+plot_2010
 ```
 
 
+## Problem 3
+
+```{r}
+accel_df =
+  read_csv('data/nhanes_accel.csv')|>
+  janitor::clean_names()
+
+tidy_accel_df = 
+  pivot_longer(
+    accel_df,
+    min1:min1440,
+    names_to = 'MIN',
+    values_to = 'MIMS'
+  )
 
 
+
+```
 
 
 
