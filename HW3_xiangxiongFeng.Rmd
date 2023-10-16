@@ -151,7 +151,10 @@ Excellent_brfss =
     mean_data_value = mean(data_value)
   )
 
-  
+
+Excellent_brfss |>
+  ggplot(aes(x=year, y = mean_data_value)) +
+  geom_line(aes(color = state), alpha = .5)
   
 ```
 
